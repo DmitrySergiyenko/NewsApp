@@ -4,32 +4,37 @@ import { gStyle } from '../styles/style';
 import { Formik } from 'formik';
 
 
-export default function Form() {
+export default function Form({ addArticle} ) {
     return (
         <View>
-            <Formik initialValues={{name: '', anons: '', full: '', img: ''}} onSubmit={(values) =>{
-                console.log(values);
+            <Formik initialValues={{name: '', anons: '', full: '', img: ''}} onSubmit={(values, action) =>{
+                addArticle(values);
+                action.resetForm();
             }}>
                 {(props) => (
                     <View>
-                        <TextInput 
+                        <TextInput
+                            style={styles.input}
                             value={props.values.name} 
                             placeholder='Enter Name' 
                             onChangeText={props.handleChange('name')}
                         />
-                        <TextInput 
+                        <TextInput
+                            style={styles.input}
                             value={props.values.anons}
                             multiline
                             placeholder='Enter Anons' 
                             onChangeText={props.handleChange('anons')}
                         />
-                        <TextInput 
+                        <TextInput
+                            style={styles.input}
                             value={props.values.full}
                             multiline
                             placeholder='Enter full article' 
                             onChangeText={props.handleChange('full')}
                         />
                         <TextInput 
+                            style={styles.input}
                             value={props.values.img} 
                             placeholder='Enter image' 
                             onChangeText={props.handleChange('img')}
@@ -43,7 +48,14 @@ export default function Form() {
 };
 
 const styles = StyleSheet.create({
+    input: {
+        borderWidth: 1,
+        marginTop: 15,
+        padding: 15,
+        borderColor: 'silver',
+        borderRadius: 5,
 
+    }
 })
 
 

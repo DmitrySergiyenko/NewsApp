@@ -19,6 +19,17 @@ export default function Main({ navigation }) {
 
   const [modalWindow, setModalWindow] = useState(false);
 
+  const addArticle = (article) => {
+    setNews((list) => {
+      article.key = Math.random().toString();
+      return[
+        article,
+        ...list
+      ]
+    });
+    setModalWindow(false);
+  }
+
   return (
     <View style={gStyle.main}>
       <Modal visible={modalWindow} >
@@ -26,7 +37,7 @@ export default function Main({ navigation }) {
         <View style={gStyle.main}>
           <Ionicons name="close-circle" size={34} color="red" style={styles.iconClose} onPress={() => setModalWindow(false)}/>
           <Text style={styles.title}>Form add new article</Text>
-          <Form />
+          <Form addArticle={addArticle} />
         </View>
       </Modal>
       <Ionicons name="add-circle" size={34} color="green" style={styles.iconAdd} onPress={() => setModalWindow(true)}/>
